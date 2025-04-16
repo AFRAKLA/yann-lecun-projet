@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeCun Quest - Célébrité</title>
+    <link rel="stylesheet" href="style5.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Icônes Font Awesome -->
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUpiN6Ozx2pz3C_iGxKVFUd-2smW9kAtptBg&s" alt="Logo de LeCun Quest" class="logo-img">
+            <h1 class="logo"><a href="presentation.html">LeCun Quest</a></h1>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Accueil</a>
+            <a href="celeb.html" class="menu-item"><i class="fas fa-user"></i> Célébrité</a>
+            <a href="oeuvre.html" class="menu-item"><i class="fas fa-book"></i> Œuvre</a>
+            <a href="quiz.html" class="menu-item"><i class="fas fa-question-circle"></i> Quiz</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Section principale -->
+<main>
+    <section class="quiz-container">
+        <h1>Quiz</h1>
+        <h2 id="question-title">Question numéro 1 :</h2>
+        <p id="question-text">Question...............?</p>
+
+        <!-- Réponses sous forme d'ovales alignées avec A, B, C, D -->
+        <div class="answer-options">
+            <div class="row">
+                <div class="option" onclick="selectAnswer(0)">A. Réponse</div>
+                <div class="option" onclick="selectAnswer(1)">B. Réponse</div>
+            </div>
+            <div class="row">
+                <div class="option" onclick="selectAnswer(2)">C. Réponse</div>
+                <div class="option" onclick="selectAnswer(3)">D. Réponse</div>
+            </div>
+        </div>
+
+        <!-- Bouton Soumettre, initialement caché, il s'affichera après la dernière question -->
+        <button type="button" class="submit-button" id="submit-button" onclick="submitQuiz()" style="display:none;">Soumettre</button>
+    </section>
+</main>
+
+<!-- Pied de page -->
+<footer>
+    <div class="footer-container">
+        <p>&copy; 2024 LeCun Quest. Tous droits réservés.</p>
+        <p class="social-links">
+            <a href="https://www.linkedin.com/" class="social-icon" target="_blank">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/" class="social-icon" target="_blank">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </p>
+    </div>
+</footer>
+
+</body>
+</html>
+<script>
+    let currentQuestion = 0;
+    const questions = [
+        {
+            question: "Qui est Yann LeCun ?",
+            answers: ["Un acteur", "Un neuroscientifique", "Un chercheur en intelligence artificielle", "Un ingénieur en aérospatiale"],
+            correctAnswer: 0
+        },
+        {
+            question: "Quel est le domaine principal de recherche de Yann LeCun ?",
+            answers: ["La robotique", "Les réseaux de neurones et l'apprentissage profond", "La vision par ordinateur", "L'éthique de l'intelligence artificielle"],
+            correctAnswer: 1
+        },
+        {
+            question: "Quel modèle de réseau de neurones Yann LeCun est-il particulièrement connu pour avoir contribué à la création ?",
+            answers: ["Le réseau de neurones convolutifs (CNN)", "Le réseau récurrent (RNN)", "Le perceptron multicouche (MLP)", "Le modèle de transformer"],
+            correctAnswer: 0
+        },
+        {
+            question: "Quel est le nom de l'algorithme de rétropropagation du gradient, qui est fondamental pour l'entraînement des réseaux de neurones, auquel Yann LeCun a contribué ?",
+            answers: ["Backpropagation", "LeNet", "AlexNet", "ResNet"], 
+            correctAnswer: 0
+        },
+        {
+            question: "Quel prix prestigieux a été décerné à Yann LeCun, Geoffrey Hinton et Yoshua Bengio en 2018 ?",
+            answers: ["Le prix Nobel de la paix", "Le prix Turing", "Le prix Abel", "Le prix Légion d'honneur"],
+            correctAnswer: 1
+        },
+        {
+            question: "Où et quand Yann LeCun est-il né ?",
+            answers: ["Soisy-sous-Montmorency, 1960", "Paris, 1950", "Marseille, 1965", "Lyon, 1970"],
+            correctAnswer: 1
+        },
+        {
+            question: "En quelle année Yann LeCun a-t-il reçu le prix Turing ?",
+            answers: ["2015", "2018", "2020", "2022"],
+            correctAnswer: 1
+        },
+        {
+            question: "Quelle application célèbre des réseaux de neurones LeNet a-t-elle permis dans les années 1990 ?",
+            answers: ["Traduction automatique", "Reconnaissance d’écriture manuscrite", "Reconnaissance faciale", "Jeux vidéo"],
+            correctAnswer: 1
+        },
+        {
+            question: "Pour quelle entreprise Yann LeCun travaille-t-il depuis 2013 ?",
+            answers: ["Facebook (Meta)", "Microsoft", "Google", "OpenAI"],
+            correctAnswer: 2
+        },
+        {
+            question: "Dans quelle université Yann LeCun a-t-il obtenu son doctorat ?",
+            answers: ["Université Pierre et Marie Curie (UPMC)", "Université Paris-Sud (Orsay)", "Université de Cambridge", "Université McGill"],
+            correctAnswer: 0
+        }
+    ];
+
+    let selectedAnswers = []; // Tableau pour stocker les réponses sélectionnées
+
+    // Fonction pour charger la question suivante
+    function loadQuestion() {
+        const question = questions[currentQuestion];
+        document.querySelector("#question-title").textContent = `Question numéro ${currentQuestion + 1} :`;
+        document.querySelector("#question-text").textContent = question.question;
+
+        const options = document.querySelectorAll(".option");
+        options.forEach((option, index) => {
+            option.textContent = `${String.fromCharCode(65 + index)}. ${question.answers[index]}`; // Afficher A, B, C, D
+            option.onclick = () => selectAnswer(index); // Enregistrer la réponse quand l'option est cliquée
+        });
+
+        // Afficher le bouton "Soumettre" seulement à la dernière question
+        if (currentQuestion === questions.length - 1) {
+            document.getElementById("submit-button").style.display = "inline-block";
+        }
+    }
+
+    // Fonction pour gérer la sélection de la réponse
+    function selectAnswer(answerIndex) {
+        selectedAnswers[currentQuestion] = answerIndex; // Sauvegarder la réponse sélectionnée
+        if (currentQuestion < questions.length - 1) {
+            currentQuestion++;
+            loadQuestion(); // Passer à la question suivante
+        }
+    }
+
+    // Fonction pour soumettre le quiz et rediriger vers la page de score
+    function submitQuiz() {
+        // Sauvegarder les réponses dans le localStorage
+        localStorage.setItem("selectedAnswers", JSON.stringify(selectedAnswers));
+
+        // Rediriger vers la page des scores
+        window.location.href = "score.html";
+    }
+
+    // Initialiser le quiz
+    loadQuestion();
+</script>

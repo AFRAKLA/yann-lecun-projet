@@ -1,0 +1,225 @@
+/* Global Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f2f6;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh; /* Hauteur minimale de la page pour s'assurer qu'elle occupe tout l'espace */
+}
+
+/* Header */
+header {
+    background-color: #2980b9;  /* Bleu clair pour correspondre à la section Hero */
+    padding: 15px 0;
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Conteneur principal */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+/* Conteneur pour le logo et le titre */
+.logo-container {
+    display: flex; /* Place le logo et le titre côte à côte */
+    align-items: center; /* Aligne verticalement le logo et le titre */
+    justify-content: center; /* Centre horizontalement */
+    gap: 10px; /* Ajoute un espace entre le logo et le titre */
+    margin-bottom: 20px; /* Ajoute un espace entre le logo-titre et la navigation */
+}
+
+/* Logo */
+.logo-img {
+    width: 60px; /* Ajuste la largeur du logo */
+    height: auto; /* Conserve les proportions */
+    border-radius: 50%; /* Rend l'image circulaire */
+    object-fit: cover; /* Ajuste le contenu pour s'adapter au conteneur */
+}
+
+
+
+/* Titre */
+.logo {
+    font-size: 1.8rem; /* Ajuste la taille du titre */
+    margin: 0; /* Supprime les marges */
+    font-weight: bold;
+}
+
+.logo a {
+    text-decoration: none; /* Retirer le soulignement */
+    color: inherit; /* Garder la couleur d'origine */
+}
+
+.logo a:hover {
+    color: #007bff; /* Une couleur au survol, par exemple */
+}
+
+/* Liens du menu de navigation */
+.main-nav {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.menu-item {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: all 0.3s ease;
+    padding: 8px 12px;
+    border-radius: 5px;
+}
+
+.menu-item:hover {
+    background-color: rgba(26, 188, 156, 0.2);
+    color: #1abc9c;
+    transform: scale(1.05);
+}
+
+.menu-item i {
+    font-size: 1.3rem;
+}
+
+/* Contenu principal */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Permet au main de prendre tout l'espace disponible */
+    padding: 20px;
+}
+
+/* Section Quiz */
+.quiz-container {
+    max-width: 800px;
+    width: 100%; /* Utiliser 100% de la largeur disponible dans le conteneur */
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin: 30px 0; /* Marge pour espacer la section du reste du contenu */
+}
+
+.quiz-container h1 {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+}
+
+.quiz-container h2 {
+    font-size: 1.5rem;
+    margin: 20px 0;
+}
+
+.quiz-container p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+/* Options de réponse */
+.answer-options {
+    margin: 20px 0;
+}
+
+.answer-options .row {
+    display: flex;
+    justify-content: center;
+    gap: 40px; /* Espace horizontal entre les réponses */
+    margin-bottom: 40px; /* Espace vertical entre les lignes */
+}
+
+.answer-options .option {
+    padding: 15px 30px;
+    background-color: #3498db;
+    color: white;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px;
+}
+
+.answer-options .option:hover {
+    background-color: #1abc9c;
+    transform: translateY(-3px);
+}
+
+/* Bouton de soumission */
+.submit-button {
+    background-color: #1abc9c;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:hover {
+    background-color: #16a085;
+    transform: translateY(-3px);
+}
+
+/* Footer */
+footer {
+    background-color: #34495e;
+    color: white;
+    padding: 1.5rem;
+    text-align: center;
+    transition: margin-left 0.3s ease; /* Transition pour fluidité */
+    margin-top: 3rem;
+}
+
+/* Social Links */
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-icon {
+    color: white;
+    font-size: 1.5rem;
+    margin: 0 1rem;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.social-icon:hover {
+    color: #1abc9c;
+    transform: scale(1.2);
+}
+
+/* Media Queries pour la Responsivité */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 0;
+    }
+
+    .quiz-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .menu-item {
+        font-size: 1rem;
+        padding: 10px;
+    }
+}

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeCun Quest - Célébrité</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet"> <!-- Icônes Font Awesome -->
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUpiN6Ozx2pz3C_iGxKVFUd-2smW9kAtptBg&s" alt="Logo de LeCun Quest" class="logo-img">
+            <h1 class="logo"><a href="presentation.html">LeCun Quest</a></h1>
+        </div>
+        <nav class="main-nav">
+            <a href="index.html" class="menu-item"><i class="fas fa-home"></i> Accueil</a>
+            <a href="celeb.html" class="menu-item"><i class="fas fa-user"></i> Célébrité</a>
+            <a href="oeuvre.html" class="menu-item"><i class="fas fa-book"></i> Œuvre</a>
+            <a href="quiz.html" class="menu-item"><i class="fas fa-question-circle"></i> Quiz</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Contenu principal -->
+<main class="content">
+    <h2 class="score-title">Votre Score est <span id="score">0</span>/10</h2>
+    <p class="congratulations">Félicitations ! Vous avez terminé le quiz.</p>
+
+    <!-- Résultats sous forme de cartes -->
+    <div class="answers">
+        <div class="answer-card">1. <span id="answer-1">Réponse</span> <span id="feedback-1"></span></div>
+        <div class="answer-card">2. <span id="answer-2">Réponse</span> <span id="feedback-2"></span></div>
+        <div class="answer-card">3. <span id="answer-3">Réponse</span> <span id="feedback-3"></span></div>
+        <div class="answer-card">4. <span id="answer-4">Réponse</span> <span id="feedback-4"></span></div>
+        <div class="answer-card">5. <span id="answer-5">Réponse</span> <span id="feedback-5"></span></div>
+        <div class="answer-card">6. <span id="answer-6">Réponse</span> <span id="feedback-6"></span></div>
+        <div class="answer-card">7. <span id="answer-7">Réponse</span> <span id="feedback-7"></span></div>
+        <div class="answer-card">8. <span id="answer-8">Réponse</span> <span id="feedback-8"></span></div>
+        <div class="answer-card">9. <span id="answer-9">Réponse</span> <span id="feedback-9"></span></div>
+        <div class="answer-card">10. <span id="answer-10">Réponse</span> <span id="feedback-10"></span></div>
+    </div>
+
+    <!-- Bouton pour rejouer -->
+    <form action="quiz.html" method="get">
+        <button type="submit" class="button retry-button">Recommencer le quiz</button>
+    </form>
+
+    <!-- Ressources -->
+    <section class="resources">
+        <h3>Ressources Complémentaires</h3>
+        <a href="https://www.google.fr/books/edition/La_Plus_Belle_Histoire_de_l_intelligence/WcxtDwAAQBAJ?hl=fr&gbpv=1&printsec=frontcover" target="_blank" class="button">Livre Recommandé</a>
+        <a href="index.html" class="button">Retour à l'accueil</a>
+    </section>
+</main>
+
+</body> 
+</html>
+<script>
+    
+    // Récupérer les réponses sélectionnées depuis le localStorage
+    const selectedAnswers = JSON.parse(localStorage.getItem("selectedAnswers"));
+
+    // Les bonnes réponses pour chaque question, par leur index (0=A, 1=B, 2=C, 3=D)
+    const correctAnswers = [
+        2, // Question 1: C
+        1, // Question 2: B
+        0, // Question 3: A
+        1, // Question 4: B
+        1, // Question 5: B
+        0, // Question 6: A
+        1, // Question 7: B
+        1, // Question 8: B
+        0, // Question 9: A
+        0  // Question 10: A
+    ];
+
+    let score = 0; // Variable pour calculer le score
+
+   // Fonction pour afficher les bonnes réponses sous forme de A, B, C, D
+function displayAnswers() {
+    selectedAnswers.forEach((answerIndex, questionIndex) => {
+        const correctAnswerIndex = correctAnswers[questionIndex]; // L'index de la bonne réponse
+        const answerLetter = String.fromCharCode(65 + correctAnswerIndex); // Convertir l'index en lettre (A=0, B=1, C=2, D=3)
+        const feedbackElement = document.getElementById(`feedback-${questionIndex + 1}`);
+        const answerElement = document.getElementById(`answer-${questionIndex + 1}`);
+        
+        // Afficher la lettre de la bonne réponse
+        answerElement.textContent = answerLetter;
+
+        // Vérifier si la réponse est correcte
+        if (answerIndex === correctAnswerIndex) {
+            feedbackElement.textContent = "✔ Correct"; // Feedback pour réponse correcte
+            feedbackElement.style.color = "green";
+            score++; // Ajouter un point au score
+        } else {
+            feedbackElement.textContent = "✘ Incorrect"; // Feedback pour réponse incorrecte
+            feedbackElement.style.color = "red";
+        }
+
+        // Afficher la réponse de l'utilisateur (A, B, C, D)
+        const userAnswerLetter = String.fromCharCode(65 + answerIndex); // Convertir l'index de la réponse de l'utilisateur
+        document.getElementById(`answer-${questionIndex + 1}`).textContent = userAnswerLetter;
+    });
+
+    // Afficher le score final
+    document.getElementById("score").textContent = score;
+}
+
+
+    // Appeler la fonction pour afficher les bonnes réponses et calculer le score
+    displayAnswers();
+</script>
